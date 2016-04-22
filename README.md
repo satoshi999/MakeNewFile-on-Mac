@@ -8,6 +8,10 @@ The Apple Script for making new text file on current Folder
 This is the Apple Script that can make new file on current folder.  
 You can make new file on current folder by calling this script using short cut key When you are opening "Finder" at forfront.
 
+* Note
+Source code is written in "main.txt"(is not scpt file) .
+Because scpt can not open on this page.
+
 ## Usage
 Launch "Automator" app.  
 Choose "Service".  
