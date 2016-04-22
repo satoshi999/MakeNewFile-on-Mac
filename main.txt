@@ -1,0 +1,50 @@
+---OutLine--------------------------------------------------
+--Make new text file on current path if Finder is foremost
+--Name format is 'new_YYYYMdhms'
+-------------------------------------------------------------
+
+--Process is here--------------
+
+tell application "System Events"
+	--Get foremost process
+	set toProcess to item 1 of (every process whose frontmost is true)
+	--Check whether process is "Finder"
+	set objName to name of toProcess
+	if objName is equal to "Finder" then
+		--If Finder
+		tell application "Finder"
+			--Get POSIX path
+			set dirPath to POSIX path of (target of window 1 as string)
+			
+			------------------------------
+			--Create date string as bellow
+			--Format=YYYYMdhms
+			------------------------------
+			set current_date to current date
+			set val_year to year of current_date
+			set val_month to month of current_date as number
+			set val_day to day of current_date
+			set val_hours to hours of current_date
+			set val_minutes to minutes of current_date
+			set val_seconds to seconds of current_date
+			set date_time_string to val_year & val_month & val_day & val_hours & val_minutes & val_seconds as string
+			
+			-------------------------------
+			--Make new file on Terminal
+			-------------------------------
+			--Launch Terminal
+			tell application "Terminal"
+				--Create cd command to change directory using POSIX path
+				set cd_command to "cd " & "\"" & dirPath & "\""
+				--Create touch command to make file named current date
+				set touch_command to "touch new_" & date_time_string & ".txt"
+				--Execute command
+				do script cd_command & " && " & touch_command
+				--wait a 0.2 mil for making is completed
+				delay 0.2
+				--close foremost terminal
+				close window 1
+			end tell
+		end tell
+	end if
+end tell
