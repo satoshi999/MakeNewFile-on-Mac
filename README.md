@@ -33,4 +33,4 @@ MIT Licence
 
 ## Author
 
-[yorudazzz](https://github.com/yorudazzz)
+[satoshi999](https://github.com/satoshi999)
